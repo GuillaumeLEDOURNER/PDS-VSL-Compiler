@@ -28,6 +28,8 @@ MUL : '*' ;
 LBRACE : '{';
 RBRACE : '}';
 COMA : ',';
+LBKT : '[';
+RBKT : ']';
 
 IF : 'IF';
 THEN : 'THEN';
