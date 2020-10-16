@@ -38,10 +38,10 @@ public class MulExpression extends Expression {
       String result = Utils.newtmp();
 
       // new add instruction result = left + right
-      Llvm.Instruction add = new Llvm.Mul(leftRet.type.toLlvmType(), leftRet.result, rightRet.result, result);
+      Llvm.Instruction mul = new Llvm.Mul(leftRet.type.toLlvmType(), leftRet.result, rightRet.result, result);
 
       // append this instruction
-      leftRet.ir.appendCode(add);
+      leftRet.ir.appendCode(mul);
 
       // return the generated IR, plus the type of this expression
       // and where to find its result

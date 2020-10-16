@@ -38,10 +38,10 @@ public class DivExpression extends Expression {
       String result = Utils.newtmp();
 
       // new add instruction result = left + right
-      Llvm.Instruction add = new Llvm.Div(leftRet.type.toLlvmType(), leftRet.result, rightRet.result, result);
+      Llvm.Instruction div = new Llvm.Div(leftRet.type.toLlvmType(), leftRet.result, rightRet.result, result);
 
       // append this instruction
-      leftRet.ir.appendCode(add);
+      leftRet.ir.appendCode(div);
 
       // return the generated IR, plus the type of this expression
       // and where to find its result
