@@ -5,12 +5,12 @@ import TP2.TypeException;
 import TP2.Utils;
 import TP2.ASD.Expression.RetExpression;
 
-public class MinusEpression extends Expression {
+public class MinusExpression extends Expression {
 
 	Expression left;
     Expression right;
 
-    public MinusEpression(Expression left, Expression right) {
+    public MinusExpression(Expression left, Expression right) {
       this.left = left;
       this.right = right;
     }
