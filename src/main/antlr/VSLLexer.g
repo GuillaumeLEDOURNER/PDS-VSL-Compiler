@@ -25,6 +25,27 @@ PLUS      : '+'      ;
 MINUS	: '-' ;
 DIV : '/' ;
 MUL : '*' ;
+LBRACE : '{';
+RBRACE : '}';
+COMA : ',';
+
+IF : 'IF';
+THEN : 'THEN';
+ELSE : 'ELSE';
+FI: 'FI';
+WHILE : 'WHILE';
+DO : 'DO';
+DONE : 'DONE';
+VOID : 'VOID';
+INT : 'INT';
+AFFECT : ':=';
+RETURN : 'RETURN';
+PRINT : 'PRINT';
+READ : 'READ';
+FUNC : 'FUNC';
+
+PROTO : 'PROTO';
+
 
 // TODO : other keywords
 

@@ -8,7 +8,7 @@ import TP2.ASD.Expression.RetExpression;
 public class Affectation extends Expression{
 	Expression left ;
 	Expression right ;
-	
+
 	public Affectation(Expression left, Expression right) {
 		this.left = left;
 		this.right = right;
@@ -17,17 +17,24 @@ public class Affectation extends Expression{
 	@Override
 	public String pp() {
 		return "(" + left.pp() + " := " + right.pp() + ")";
-	
-		
+
+
 	}
 
 	@Override
 	public RetExpression toIR() throws TypeException {
-		 RetExpression leftRet = left.toIR();
-	      RetExpression rightRet = right.toIR();
+		RetExpression leftRet = left.toIR();
+		RetExpression rightRet = right.toIR();
+		
+		 // We check if the types mismatches
+	      if(!leftRet.type.equals(rightRet.type)) {
+	        throw new TypeException("type mismatch: have " + leftRet.type + " and " + rightRet.type);
+	      }
 	      
+	      
+
 		return null;
 	}
-	
+
 
 }
