@@ -20,7 +20,9 @@ program returns [TP2.ASD.Program out]
     //| s = statement EOF { $out = new TP2.ASD.Program($s.out);} // TODO : change when you extend the language
     ;
 //statement returns [TP2.ASD.Affectation out]
-	//: e
+	//: e=identifier AFFECT (p=primary { $out = new TP2.ASD.Affectation($out, $p.out) ; }
+	//| i=identifier {$out = new TP2.ASD.Affectation($out, $i.out) ; } ) 
+	//;
 expression returns [TP2.ASD.Expression out]
 	: term { $out = $term.out;} ( (PLUS term { $out = new TP2.ASD.AddExpression($out, $term.out) ;}) 
 	| (MINUS term { $out = new TP2.ASD.MinusExpression($out, $term.out) ;}))* 
@@ -43,4 +45,4 @@ primary returns [TP2.ASD.Expression out]
     ;
    
 //identifier returns [TP2.ASD.EXpression out]
-	//: IDENT { $out = new TP2.ASD.
+	//: IDENT { $out = new TP2.ASD.StringExpression($out) ; }
