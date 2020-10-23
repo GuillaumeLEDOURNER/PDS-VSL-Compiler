@@ -28,30 +28,36 @@ public class Main {
       VSLLexer lexer = new VSLLexer(input);
       CommonTokenStream tokens = new CommonTokenStream(lexer);
      
-      /* Pour tester le Lexer */
+      //Pour tester le Lexer 
       tokens.fill();
       for (org.antlr.v4.runtime.Token tok : tokens.getTokens()) {
     	  System.out.print(tok.getText() + " ");
-      }  /*Fin du test du Lexer */
+      }  
+      //Fin du test du Lexer 
+      
       
 
       // Instantiate Parser
-			/*
-			 * VSLParser parser = new VSLParser(tokens);
-			 * 
-			 * // Parse Program ast = parser.program().out;
-			 * 
-			 * // Pretty-print the program (to debug parsing, if you implemented it!)
-			 * System.err.println(ast.pp());
-			 * 
-			 * // Compute LLVM IR from the ast try { Llvm.IR ir = ast.toIR();
-			 * 
-			 * // Output LLVM IR System.out.println(ir); } catch(TypeException e) {
-			 * e.printStackTrace(); // Useful for developping, not for the ``end users''!
-			 * System.err.println(e.getMessage()); }
-			 */
-    } catch(IOException e) {
-      e.printStackTrace();
+      VSLParser parser = new VSLParser(tokens);
+
+      // Parse
+      Program ast = parser.program().out;
+
+      // Pretty-print the program (to debug parsing, if you implemented it!)
+      System.err.println(ast.pp());
+
+      // Compute LLVM IR from the ast
+      try {
+          Llvm.IR ir = ast.toIR();
+
+          // Output LLVM IR
+          System.out.println(ir);
+        } catch(TypeException e) {
+          e.printStackTrace(); // Useful for developping, not for the ``end users''!
+          System.err.println(e.getMessage());
+        }
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
     }
   }
-}

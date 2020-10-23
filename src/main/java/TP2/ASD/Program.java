@@ -5,7 +5,6 @@ import TP2.TypeException;
 
 public class Program {
     Expression e; // What a program contains. TODO : change when you extend the language
-
     public Program(Expression e) {
       this.e = e;
     }

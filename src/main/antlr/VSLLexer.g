@@ -17,11 +17,16 @@ COMMENT : '//' (~'\n')* -> skip
 fragment LETTER : 'a'..'z' ;
 fragment DIGIT  : '0'..'9' ;
 fragment ASCII  : ~('\n'|'"');
+// other tokens (no conflict with keywords in VSL)
+
+IDENT   : LETTER (LETTER|DIGIT)*;
+TEXT    : '"' (ASCII)* '"' { setText(getText().substring(1, getText().length() - 1)); };
+INTEGER : (DIGIT)+ ;
 
 // keywords
 LP    : '(' ; // Left parenthesis
 RP    : ')' ;
-PLUS      : '+'      ;
+PLUS      : '+' ;
 MINUS	: '-' ;
 DIV : '/' ;
 MUL : '*' ;
@@ -51,7 +56,4 @@ PROTO : 'PROTO';
 
 // TODO : other keywords
 
-// other tokens (no conflict with keywords in VSL)
-IDENT   : LETTER (LETTER|DIGIT)*;
-TEXT    : '"' (ASCII)* '"' { setText(getText().substring(1, getText().length() - 1)); };
-INTEGER : (DIGIT)+ ;
+
