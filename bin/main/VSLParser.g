@@ -16,20 +16,24 @@ options {
 // TODO : other rules
 
 program returns [TP2.ASD.Program out]
-    : e=expression EOF { $out = new TP2.ASD.Program($e.out); } // TODO : change when you extend the language
+    : e=expression EOF { $out = new TP2.ASD.Program($e.out); }
+    //| s = statement EOF { $out = new TP2.ASD.Program($s.out);} // TODO : change when you extend the language
     ;
-
+//statement returns [TP2.ASD.Affectation out]
+	//: e
 expression returns [TP2.ASD.Expression out]
-    : l=factor PLUS r=expression  { $out = new TP2.ASD.AddExpression($l.out, $r.out); }
-    | l=factor MINUS r=expression  { $out = new TP2.ASD.MinusExpression($l.out, $r.out); }
-    | f=factor { $out = $f.out; }
+	: term { $out = $term.out;} ( (PLUS term { $out = new TP2.ASD.AddExpression($out, $term.out) ;}) 
+	| (MINUS term { $out = new TP2.ASD.MinusExpression($out, $term.out) ;}))* 
     // TODO : that's all?
     ;
 
+term returns [TP2.ASD.Expression out]
+	: factor {$out = $factor.out ;}(( MUL factor { $out = new TP2.ASD.MulExpression($out, $factor.out); })
+	| ( DIV factor { $out = new TP2.ASD.DivExpression($out, $factor.out); }))*
+	;
+	
 factor returns [TP2.ASD.Expression out]
-    : l=factor MUL r=expression  { $out = new TP2.ASD.MulExpression($l.out, $r.out); }
-    | l=factor DIV r=expression  { $out = new TP2.ASD.DivExpression($l.out, $r.out); }
-    | p=primary { $out = $p.out; }
+    : p=primary { $out = $p.out; }
     // TODO : that's all?
     ;
 
@@ -37,3 +41,6 @@ primary returns [TP2.ASD.Expression out]
     : INTEGER { $out = new TP2.ASD.IntegerExpression($INTEGER.int); }
     // TODO : that's all?
     ;
+   
+//identifier returns [TP2.ASD.EXpression out]
+	//: IDENT { $out = new TP2.ASD.
